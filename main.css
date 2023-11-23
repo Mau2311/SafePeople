@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --BGCOLOR1: #FF5757;
+    --BGCOLOR2: #8C52FF;
+
+    --BORDER-RADIUS: 15px;
+}
+
+body {
+    height: 100vh;
+    background-image: linear-gradient(var(--BGCOLOR1) , var(--BGCOLOR2));
+    font-family: "Agbalumo", courier, monospace;
+}
+
+a:any-link, a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    background-color: aliceblue;
+    width: 80%;
+    height: 75%;
+    border-radius: var(--BORDER-RADIUS);
+
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.option-btn {
+    width: 75%;
+    height: 50%;
+    border-radius: var(--BORDER-RADIUS);
+    margin: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-btn:hover {
+    cursor: pointer;
+    transform: scale(1.15);
+    transition: all 1.25s ease-in-out;
+}
+
+.option-btn:first-child { background-color: #1827ca ;}
+.option-btn:nth-child(2) { background-color: #621f87 ;}
+.option-btn:nth-child(3) { background-color: #5f93bb ;}
+.option-btn:nth-child(4) { background-color: #c21cc5 ;}
+.option-btn:nth-child(5) { background-color: #e541e8 ;}
+.option-btn:last-child { background-color: #83b3d8 ;}
+
+.alarm {
+    display: flex;
+    justify-content: center;
+}
+
+.alarm img{
+    margin-top: 5rem;
+    animation: scaleBell 1.5s ease-in-out .25s infinite alternate;
+    width: 300px;
+    height: 300px;
+}
+
+@keyframes scaleBell {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.25);
+    }
+}
+
+.audio {
+    display: flex;
+    justify-content: center;
+}
+
+.row {
+    margin-top: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 10rem;
+    text-align: center;
+}
+
+.row image {
+    width: 30%;
+    height: auto;
+    border: 1px solid #333;
+}
+
+.row button:not(:last-child) {   
+    margin-left: 6rem;
+}
+
+

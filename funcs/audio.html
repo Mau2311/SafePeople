@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" class="audio">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Safe People - Grabación de Audio </title>
+    <link rel="stylesheet" href="/main.css">
+    <link rel="icon" type="image/png" href="/img/SafePeopleLogoM.png">
+</head>
+<body>
+    <div class="row">
+        <img src="/img/mic.png" alt="Mic" width="300">
+        <img src="/img/muteMic.png" alt="Mute Mic" width="250">
+        <img src="/img/speaker.png" alt="Speaker" width="300">
+    </div>
+    <div class="row">
+        <button id="startButton">Iniciar Grabación</button>
+        <button id="stopButton" disabled>Detener Grabación</button>
+        <audio id="audioPlayer" controls></audio>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let mediaRecorder;
+            let audioChunks = [];
+
+            const startButton = document.getElementById('startButton');
+            const stopButton = document.getElementById('stopButton');
+            const audioPlayer = document.getElementById('audioPlayer');
+
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    mediaRecorder = new MediaRecorder(stream);
+
+                    mediaRecorder.ondataavailable = event => {
+                        if (event.data.size > 0) {
+                            audioChunks.push(event.data);
+                        }
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        audioPlayer.src = audioUrl;
+                    };
+
+                    startButton.addEventListener('click', () => {
+                        audioChunks = [];
+                        mediaRecorder.start();
+                        startButton.disabled = true;
+                        stopButton.disabled = false;
+                    });
+
+                    stopButton.addEventListener('click', () => {
+                        mediaRecorder.stop();
+                        startButton.disabled = false;
+                        stopButton.disabled = true;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al acceder al dispositivo de audio:', error);
+                });
+        });
+    </script>
+</body>
+</html>

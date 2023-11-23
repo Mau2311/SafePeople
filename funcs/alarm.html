@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" class="alarm">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Safe People - Alarma </title>
+    <link rel="stylesheet" href="/main.css">
+    <link rel="icon" type="image/png" href="/img/SafePeopleLogoM.png">
+</head>
+<body>
+    <img src="/img/bell.png" alt="bell">
+    
+    <audio id="alarmSound" src="/audio/loud-alarm-ringtones-annoying.mp3" preload="auto"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const alarmSound = document.getElementById('alarmSound');
+
+            alarmSound.play();
+
+            setTimeout(() => {
+                alarmSound.pause();
+                alarmSound.currentTime = 0;
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
